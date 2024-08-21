@@ -1,0 +1,37 @@
+{
+    "categories": [
+      {
+        "id": "c1",
+        "name": "CSPM Executive Dashboard",
+        "widgets": [
+          {
+            "id": "w1",
+            "name": "Security Overview",
+            "text": "Random text for Security Overview."
+          },
+          {
+            "id": "w2",
+            "name": "Compliance Status",
+            "text": "Random text for Compliance Status."
+          }
+        ]
+      },
+      {
+        "id": "c2",
+        "name": "Performance Metrics",
+        "widgets": [
+          {
+            "id": "w3",
+            "name": "System Uptime",
+            "text": "Random text for System Uptime."
+          },
+          {
+            "id": "w4",
+            "name": "Response Time",
+            "text": "Random text for Response Time."
+          }
+        ]
+      }
+    ]
+  }
+  

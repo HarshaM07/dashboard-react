@@ -1,38 +1,311 @@
+/* App.css */
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f1f4f9; /* Silver gray background for the entire page */
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow: hidden; /* Prevent horizontal scroll */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: #ffffff; /* White background for header */
+  color: cadetblue;
+  padding: 15px 20px; /* Adjust padding for overall spacing */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header .breadcrumb {
+  font-size: 0.875rem; /* Adjust font size as needed */
+}
+
+.header .search-container {
+  position: relative;
+  /* display: inline-block; */
+  flex-grow: 1; /* Allow the search container to take up available space */
+  max-width: 300px;
+}
+
+.header .search-container input[type="text"] {
+  padding-left: 30px; /* Add padding to leave space for the icon */
+}
+
+.header .search-container .search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #888; /* Light gray color for the icon */
+}
+
+.header .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between "Add Widget" button and "Refresh" icon */
+}
+
+.header .header-actions .add-widget-button {
+  padding: 8px 16px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.header .header-actions .add-widget-button:hover {
+  opacity: 0.9;
+}
+
+.header .header-actions .refresh-icon {
+  font-size: 1.25rem; /* Size of the refresh icon */
+  color: cadetblue;
+  cursor: pointer;
+  transition: color 0.3s; /* Smooth transition on hover */
+}
+
+.header .header-actions .refresh-icon:hover {
+  color: #0056b3; /* Darker color on hover */
+}
+
+.main-content {
+  display: flex;
+  flex: 1; /* Take up the remaining space */
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling outside of content area */
+}
+
+.dashboard {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto; /* Allow scrolling within this section */
+  background-color: #ffffff; /* White background for dashboard */
+}
+
+.category {
+  flex: 1 1 100%;
+  margin-bottom: 20px;
+  background-color: #f1f4f9; /* White background for categories */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.category-header h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.category-selection {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* Allows horizontal scrolling if there are too many categories */
+  margin-bottom: 20px;
+}
+
+.category-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent; /* Underline effect */
+  font-weight: bold;
+  color: #007bff;
+  margin-right: 10px;
+  transition: border-bottom 0.3s ease, color 0.3s ease;
+}
+
+.category-item:hover {
+  background-color: #f0f0f0;
+}
+
+.category-item.selected {
+  border-bottom: 3px solid #007bff; /* Highlight selected category */
+  color: #0056b3;
+}
+
+.add-widget-button {
+  padding: 8px 16px;
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.add-widget-button:hover {
+  opacity: 0.9;
+}
+
+.widget-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.widget {
+  flex: 1 1 calc(33.333% - 20px); /* 3 widgets per row */
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: #ffffff; /* White background for widgets */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.widget .remove {
+  display: block;
+  margin-top: 10px;
+  color: #f44336;
+  cursor: pointer;
+}
+
+.widget .remove:hover {
+  opacity: 0.7;
+}
+
+/* Sliding Widget Form */
+#widget-form-container {
+  position: fixed; /* Fixed position to cover the entire viewport */
+  top: 0;
+  right: -40%; /* Start off-screen */
+  width: 40%;
+  height: 100vh; /* 100% of the viewport height */
+  background-color: #ffffff; /* White background */
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease-in-out; /* Smooth transition */
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+#widget-form-container.open {
+  right: 0; /* Slide in from the right */
+}
+
+.widget-form {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.widget-form h2 {
+  background-color: darkblue; /* Blue background for the heading */
+  color: white;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 0;
+}
+
+.widget-form p {
+  margin: 20px 0; /* Space above and below the text */
+}
+
+.widget-form select,
+.widget-form input,
+.widget-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: auto; /* Push buttons to the bottom */
+}
+
+.form-buttons button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.form-buttons .confirm-button {
+  background-color: #007bff; /* Blue background for confirm button */
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.form-buttons .cancel-button {
+  background-color: #f44336; /* Red background for cancel button */
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-buttons button:hover {
+  opacity: 0.9;
+}
+
+/* Empty Widget Box */
+.empty-widget-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(33.333% - 20px); /* Same width as widget cards */
+  height: 150px; /* Adjust height as needed */
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  text-align: center;
+  color: #007bff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.empty-widget-box p {
+  margin: 0;
+  padding: 0;
+}
+
+.empty-widget-box:hover {
+  background-color: #e0e0e0;
+}
+
+.widget-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.widget-card h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.widget-card p {
+  margin: 5px 0 0;
+}
+.dashboard-title {
+  color: #0056b3;
 }
