@@ -41,3 +41,7 @@ Before you begin, ensure you have the following installed on your machine:
    ```bash
    git clone https://github.com/HarshaM07/dashboard-react.git
    cd dashboard-react
+
+2 ** To run project **
+'''
+npm start
