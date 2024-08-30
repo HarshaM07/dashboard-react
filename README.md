@@ -15,6 +15,13 @@ This project is a widget dashboard built using [React](https://reactjs.org/). It
 - **Styling**: CSS, Flexbox
 - **Icons**: Font Awesome
 
+##snapshots:
+1.![image](https://github.com/user-attachments/assets/06607614-c875-4ee7-a963-829e2863e966)
+
+2.![image](https://github.com/user-attachments/assets/22afbd28-6bfa-4831-8be3-21cf2d60cdab)
+
+
+
 ## Getting Started
 
 ### Prerequisites
